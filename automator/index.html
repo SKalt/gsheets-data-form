@@ -1,11 +1,11 @@
 <head>
-
+  <title>Setup the Public Google Sheet API</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
-
 <body>
-  <article>
+  <article class="container">
     <h1>Using data from google sheets</h1>
-    <section id="step_0">
+    <section id="step-0" class="col-xs-12">
       <h2>Consider whether using google sheets is appropriate</h2>
       <div>
         <p>
@@ -28,7 +28,7 @@
         google sheets may not be a viable solution.
       </div>
     </section>
-    <section id="step_1">
+    <section id="step-1">
       <h2>Publish a Google Sheet</h2>
       <div>
         <p>
@@ -41,11 +41,12 @@
         </p>
       </div>
     </section>
-    <section id="step_2">
+    <section id="step-2">
       <h2>Acquire, Secure a Google Sheets API Key</h2>
       <div>
         <p>
-          Go to <a id="api_key" href="">your google cloud credentials dashboard</a>.
+          Go to <a id="api-key-link" href="https://console.developers.google.com/apis/credentials" target="_blank">
+            your google cloud credentials dashboard</a>.
            Click create credentials > api key.</p>
         <img src="" /> <img src="" />
         <p>
@@ -60,38 +61,42 @@
           the google sheets api. The key will not give users any permissions to
           edit the sheet. If you are worried about api quota theft, check out
           <a href="https://support.google.com/cloud/answer/6310037"
-           target="goog">Google's recommendations</a>.
+           target="goog">Google's recommendations</a>.  In <a href='#step-1'>
+            step 1</a> getting a shareable link also means anyone who can access
+           your site can find the link to view your google sheet.
+        </p>
+        <p>
+          Now paste the key here: <input type="text" id='api-key' />
         </p>
       </div>
     </section>
-    <section id="step_3">
+    <section id="step-3">
       <h2>Test your data URL(s)</h2>
       <div>
-        <div id="test-links"></div>
-        <button>Test</button>
-        <pre id="test">
-
-        </pre>
+        <button id="make-link">Make link</button>
+        <input id="fetch-link" type="text"/>
+        <div id="test-link">
+          <button>Test link</button>
+          <pre id="test"></pre>
+        </div>
       </div>
     </section>
-    <section id="step_4">
+    <section id="step-4">
       <h2>Use the data</h2>
       <div>
         <p>
           <pre id="sample-code">
-            fetch(URL).then(response => {
-              if (response.ok){
-                return response.json();
-              } else {
-                throw new Error(`response status ${response.status}`);
-              }
-            }).then(json => doThings(json));
+fetch(URL).then(response => {
+  if (response.ok){
+    return response.json();
+  } else {
+    throw new Error(`response status ${response.status}`);
+  }
+}).then(json => doThings(json.vaues));
           </pre>
         </p>
       </div>
     </section>
   </article>
-
-
-  <script src="index.min.js"></script>
+  <script src="./js/index.min.js"></script>
 </body>
