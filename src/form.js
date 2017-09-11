@@ -12,7 +12,7 @@ const get = {
   sheetId: ()=>linkToId(get.valueOf('ID')),
   link: ()=>get.valueOf('fetch-link'),
   range: ()=>get.valueOf('range')
-}
+};
 
 const test = {
   link: ()=>{
@@ -21,10 +21,10 @@ const test = {
         return response.json();
       }
       return response.text();
-    })
+    }).catch(err => err.message)
       .then(content => document.getElementById('test').textContent = content);
   }
-}
+};
 
 const makeLink = () => {
   let params = {
@@ -34,15 +34,15 @@ const makeLink = () => {
   };
   let url = formatUrl(params);
   document.getElementById('fetch-link').value = url;
-}
+};
 
 const copyLink = () => {
   document.getElementById('fetch-link').select();
   document.execCommand('copy');
-}
+};
 const toggle = (el) =>{
   el.css.display = el.css.display ? '' : 'none';
-}
+};
 // poll for window closing
 function pollWindow(url, cb){
   let tab = window.open(url);
@@ -51,12 +51,12 @@ function pollWindow(url, cb){
 }
 
 window.addEventListener('load', function() {
-  get._('api-key-link').addEventListener('click', e => {
+  get._('api-key-link').addEventListener('click', () => {
     get._('api-key-input').focus();
   });
-  get('make-link').addEventListener('click', makeLink);
-  get('test-link').addEventListener('click', test.link);
+  get._('make-link').addEventListener('click', makeLink);
+  get._('test-link').addEventListener('click', test.link);
   get.all('section > h4').forEach(el =>{
-    el.addEventListener('click', e => toggle(el.nexElementSibling));
+    el.addEventListener('click', () => toggle(el.nexElementSibling));
   });
 });

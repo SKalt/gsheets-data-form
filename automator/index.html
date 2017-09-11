@@ -66,15 +66,19 @@
            your site can find the link to view your google sheet.
         </p>
         <p>
-          Now paste the key here: <input type="text" id='api-key' />
+          Now paste the key here: <input type="text" id='api-key-form' />
         </p>
       </div>
     </section>
     <section id="step-3">
       <h2>Test your data URL(s)</h2>
       <div>
+        <p>
+          First, paste a range in <a href="" target="_blank">A1 notation</a> here:
+          <input type="text" id="range" />
+        </p>
         <button id="make-link">Make link</button>
-        <input id="fetch-link" type="text"/>
+        <input id="fetch-link" type="text" size="100"/>
         <div id="test-link">
           <button>Test link</button>
           <pre id="test"></pre>
@@ -98,5 +102,5 @@ fetch(URL).then(response => {
       </div>
     </section>
   </article>
-  <script src="./js/index.min.js"></script>
+  <script src="./js/index.js"></script>
 </body>
