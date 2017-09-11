@@ -1,5 +1,5 @@
 // import {createStore, combineReducers} from 'redux';
-import {formatUrl} from '../../src/url-formatter.js';
+import {formatUrl} from './url-formatter.js';
 
 const linkToId = (link) => link.replace(/.*\/d\//, '')
   .replace(/\/edit.+/, '');

@@ -1,13 +1,10 @@
-function* keys(arrayOfKeys){
-  yield* arrayOfKeys;
-}
 /**
  * Returns an array of arrays with keys described in
  * @param  {Object|Array} json   [description]
  * @param  {[type]} header [description]
  * @return {[type]}        [description]
  */
-function process(json, header) {
+export function process(json, header) {
   const values = Array.isArray(json) ? json : json.values;
   if (!values) throw new Error('no values supplied:' + JSON.stringify(json));
   header = (!header && header !== 0) ? [] : header; // may still be an integer
@@ -16,9 +13,8 @@ function process(json, header) {
      values[header] =
   return values.map(
     row => {
-      let _keys = keys(header);
       let _row = [];
-      row.forEach((cell, index) => _row[_keys.next() || index]);
+      row.forEach((cell, index) => _row[header[index] || index]);
       return _row;
     }
   );
@@ -30,7 +26,7 @@ function process(json, header) {
  * @param  {String[]|integer|undefined} header an integer >= 0 indicating an array of column names or the array itself, or undefined, indicating no such array is present.
  * @return {Array[]} an array of arrays of cell values.
  */
-async function getJson(URL, header){
+export function getJson(URL, header){
   return fetch(URL).then(response => {
     if (response.ok){
       return response.json();
