@@ -1,0 +1,97 @@
+<head>
+
+</head>
+
+<body>
+  <article>
+    <h1>Using data from google sheets</h1>
+    <section id="step_0">
+      <h2>Consider whether using google sheets is appropriate</h2>
+      <div>
+        <p>
+          Hosting via google sheets provides a free way to host data that changes
+          frequently and provides a user-friendly way to manually update data. If
+          you are interested in hosting data that is
+        </p>
+        <ul>
+          <li>
+            private
+          </li>
+          <li>
+            more than 500 views per 100 seconds
+            <a href="https://developers.google.com/sheets/api/limits" target="goog">(the api limit)</a>
+          </li>
+          <li>
+            more than a few hundred rows
+          </li>
+        </ul>
+        google sheets may not be a viable solution.
+      </div>
+    </section>
+    <section id="step_1">
+      <h2>Publish a Google Sheet</h2>
+      <div>
+        <p>
+          Navigate to the sheet you want to publish, then go to
+          <span id="share">share</span> > <span id="get-shareable">get shareable link</span>.
+        </p>
+        <p>
+          Paste the link here: <input id="ID" type="textbox" /><button>Add id</button>
+          <span class="ids"></span>
+        </p>
+      </div>
+    </section>
+    <section id="step_2">
+      <h2>Acquire, Secure a Google Sheets API Key</h2>
+      <div>
+        <p>
+          Go to <a id="api_key" href="">your google cloud credentials dashboard</a>.
+           Click create credentials > api key.</p>
+        <img src="" /> <img src="" />
+        <p>
+          Confirm key creation by clicking 'restrict key'. </p>
+        <img src="" />
+        <p>
+          Go to your newly created api key and restrict its use to your intended site (and this one, for testing purposes).
+        </p>
+        <img src="" />
+        <p>
+          Note that anyone can use this key on your whitelisted site(s) to call
+          the google sheets api. The key will not give users any permissions to
+          edit the sheet. If you are worried about api quota theft, check out
+          <a href="https://support.google.com/cloud/answer/6310037"
+           target="goog">Google's recommendations</a>.
+        </p>
+      </div>
+    </section>
+    <section id="step_3">
+      <h2>Test your data URL(s)</h2>
+      <div>
+        <div id="test-links"></div>
+        <button>Test</button>
+        <pre id="test">
+
+        </pre>
+      </div>
+    </section>
+    <section id="step_4">
+      <h2>Use the data</h2>
+      <div>
+        <p>
+          <pre id="sample-code">
+            fetch(URL).then(response => {
+              if (response.ok){
+                return response.json();
+              } else {
+                throw new Error(`response status ${response.status}`);
+              }
+            }).then(json => doThings(json));
+          </pre>
+        </p>
+      </div>
+    </section>
+  </article>
+
+
+  <script src="index.min.js"></script>
+</body>
