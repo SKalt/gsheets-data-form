@@ -1,17 +1,18 @@
 <head>
   <title>Setup the Public Google Sheet API</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/styles.css" />
 </head>
 <body>
   <article class="container">
     <h1>Using data from google sheets</h1>
-    <section id="step-0" class="col-xs-12">
+    <section id="step-0">
       <h2>Consider whether using google sheets is appropriate</h2>
       <div>
         <p>
           Hosting via google sheets provides a free way to host data that changes
           frequently and provides a user-friendly way to manually update data. If
-          you are interested in hosting data that is
+          you are interested in hosting data that is:
         </p>
         <ul>
           <li>
@@ -36,8 +37,7 @@
           <span id="share">share</span> > <span id="get-shareable">get shareable link</span>.
         </p>
         <p>
-          Paste the link here: <input id="ID" type="textbox" /><button>Add id</button>
-          <span class="ids"></span>
+          <input id="ID" type="textbox" placeholder="Paste the sharing link here" />
         </p>
       </div>
     </section>
@@ -48,14 +48,11 @@
           Go to <a id="api-key-link" href="https://console.developers.google.com/apis/credentials" target="_blank">
             your google cloud credentials dashboard</a>.
            Click create credentials > api key.</p>
-        <img src="" /> <img src="" />
         <p>
           Confirm key creation by clicking 'restrict key'. </p>
-        <img src="" />
         <p>
           Go to your newly created api key and restrict its use to your intended site (and this one, for testing purposes).
         </p>
-        <img src="" />
         <p>
           Note that anyone can use this key on your whitelisted site(s) to call
           the google sheets api. The key will not give users any permissions to
@@ -66,7 +63,7 @@
            your site can find the link to view your google sheet.
         </p>
         <p>
-          Now paste the key here: <input type="text" id='api-key-form' />
+          <input type="text" id='api-key-form' placeholder="Now paste the api key here"/>
         </p>
       </div>
     </section>
@@ -75,12 +72,14 @@
       <div>
         <p>
           First, paste a range in <a href="" target="_blank">A1 notation</a> here:
-          <input type="text" id="range" />
+          <input type="text" id="range" placeholder="range goes here"/>
+        </p>
+        <p>
+          <input id="fetch-link" type="text" placeholder="..."/>
         </p>
         <button id="make-link">Make link</button>
-        <input id="fetch-link" type="text" size="100"/>
-        <div id="test-link">
-          <button>Test link</button>
+        <button id="test-link">Test link</button>
+        <div>
           <pre id="test"></pre>
         </div>
       </div>
@@ -89,6 +88,7 @@
       <h2>Use the data</h2>
       <div>
         <p>
+          You can use the response as below:
           <pre id="sample-code">
 fetch(URL).then(response => {
   if (response.ok){
@@ -96,8 +96,9 @@ fetch(URL).then(response => {
   } else {
     throw new Error(`response status ${response.status}`);
   }
-}).then(json => doThings(json.vaues));
-          </pre>
+}).then(json => doThings(json.vaues));</pre>
+          See <a href="" target="_blank">helper functions in the github repo</a>
+          for more ideas.
         </p>
       </div>
     </section>

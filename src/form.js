@@ -7,7 +7,7 @@ const linkToId = (link) => link.replace(/.*\/d\//, '')
 const get = {
   _:(id)=>document.getElementById(id),
   all: (selector)=>document.querySelectorAll(selector),
-  valueOf: (id)=>get._(id).value,
+  valueOf: (id)=>get._(id).value.trim(),
   key: ()=>get.valueOf('api-key-form'),
   sheetId: ()=>linkToId(get.valueOf('ID')),
   link: ()=>get.valueOf('fetch-link'),
@@ -18,7 +18,7 @@ const test = {
   link: ()=>{
     fetch(get.link()).then(response => {
       if (response.ok){
-        return response.json();
+        return response.text();
       }
       return response.text();
     }).catch(err => err.message)
@@ -27,12 +27,20 @@ const test = {
 };
 
 const makeLink = () => {
-  let params = {
-    key: get.key(),
-    sheetId: get.sheetId(),
-    range: get.range()
+  const scrollTo = (id, msg) =>{
+    let el = get._(id);
+    el.scrollIntoView();
+    el.focus();
+    msg && alert(msg);
+    throw new Error(msg);
   };
-  let url = formatUrl(params);
+  let key = encodeURIComponent(get.key());
+  let sheetId = get.sheetId();
+  let range = encodeURIComponent(get.range());
+  if (!key) scrollTo('api-key-form', 'api key missing');
+  if (!sheetId) scrollTo('ID', 'sheet ID missing');
+  if (!range) scrollTo('range', 'range missing');
+  let url = formatUrl({key, sheetId, range});
   document.getElementById('fetch-link').value = url;
 };
 
@@ -41,7 +49,7 @@ const copyLink = () => {
   document.execCommand('copy');
 };
 const toggle = (el) =>{
-  el.css.display = el.css.display ? '' : 'none';
+  el.style.display = el.style.display ? '' : 'none';
 };
 // poll for window closing
 function pollWindow(url, cb){
@@ -56,7 +64,9 @@ window.addEventListener('load', function() {
   });
   get._('make-link').addEventListener('click', makeLink);
   get._('test-link').addEventListener('click', test.link);
-  get.all('section > h4').forEach(el =>{
-    el.addEventListener('click', () => toggle(el.nexElementSibling));
+  get.all('section h2').forEach(el =>{
+    el.addEventListener('click', function(){
+      toggle(this.nextElementSibling);
+    });
   });
 });

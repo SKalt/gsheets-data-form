@@ -1,0 +1,26 @@
+pre {
+  font-family: monospace;
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+pre:empty:after {
+  content: 'no tests yet...';
+}
+input {
+  width:100%;
+  overflow: hidden;
+}
+article {
+  counter-reset: section;
+}
+section h2::before {
+  counter-increment: section;
+  content: counter(section);
+  padding-right: 2em;
+}
+
+#test {
+  margin-top:1em;
+}
